@@ -1,0 +1,24 @@
+{
+    "name": "nw/digicon",
+    "description": "A test digicon wp plugin",
+    "type": "wp-plugin",
+    "require": {
+        "illuminate/container": "^5.6",
+        "illuminate/database": "^5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aaron tolentino",
+            "email": "aaron.tolentino@nuworks.ph"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": 
+            {
+               "Digicon\\": "app/"
+            },
+        "files": ["helpers.php"]
+    }        
+}
