@@ -91,7 +91,7 @@ class EventsController
     {
 
         return view('events.form', [
-            'action' => self::CREATE,
+            'title' => 'Creates'
         ]);
     }
 
@@ -105,7 +105,7 @@ class EventsController
 
         $event = Event::findOrFail($_GET['id']);
 
-        return view('events.form', ['event' => $event]);
+        return view('events.form', ['event' => $event, 'title' => 'Edit']);
     }
 
     /**

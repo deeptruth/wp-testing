@@ -1,6 +1,8 @@
 <?php
 
-use Digicon\Setup\App;
+require DIGICON_EVENTS_PLUGIN_DIR . 'config/routes.php';
+
+use Digicon\Setup\Factory;
 use Digicon\Setup\Database;
 use Illuminate\Container\Container;
 
@@ -8,14 +10,16 @@ use Illuminate\Container\Container;
  * Set up db after plugin's activation
  */
 
-Database::init();
-
 /**
  * Bootstrap container
  * @var Container
  */
 $container = new Container;
 
-$app = $container->make(App::class);
+$app = $container->make(Factory::class);
 
-$app->make();
+$app->init($routes);
+
+$database = $container->make(Database::class);
+
+$database->init();

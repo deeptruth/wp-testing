@@ -70,6 +70,11 @@ class EventListTable extends BaseWPListTable
      */
     public function column_action($item)
     {
-        return '<a href="'. self_admin_url('admin.php?page=edit-event&action=edit&id='.$item->id) .'">Edit</a> | <a href="'. self_admin_url('admin.php?page=delete-event&action=delete_confirmation&id='.$item->id) .'">Delete</a>';
+        return '<a href="'. self_admin_url('admin.php?page=edit-event&id='.$item->id) .'">
+                    Edit
+                </a> | 
+                <a href="'. self_admin_url('admin.php?page=delete-event&id='.$item->id) .'">
+                    Delete
+                </a>';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Digicon\Setup;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+
 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 /**
@@ -10,19 +12,47 @@ require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 class Database
 {
-    public static function init()
+    public function __construct()
     {
-        self::install();
-        self::unInstall();
+        $this->registerProviders();
+    }
+
+    public function init()
+    {
+        $this->install();
+        $this->unInstall();
     }
 
     public function install()
     {
-        register_activation_hook(DIGICON_EVENTS_INIT_FILE, array(__CLASS__, 'registerTables'));
+        register_activation_hook(DIGICON_EVENTS_INIT_FILE, array($this, 'registerTables'));
     }
 
     /**
-     * 
+     * Register providers here...
+     *
+     */
+    public function registerProviders()
+    {
+        global $wpdb;
+
+        $capsule = new Capsule;
+        $capsule->addConnection([
+            'driver' => defined('DB_DRIVER') ? DB_DRIVER : 'mysql',
+            'host' => DB_HOST,
+            'database' => DB_NAME,
+            'username' => DB_USER,
+            'password' => DB_PASSWORD,
+            'charset' => DB_CHARSET,
+            'collation' => DB_COLLATE ? DB_COLLATE : DB_CHARSET . '_unicode_ci',
+            'prefix' => $wpdb->prefix,
+        ]);
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+    }
+
+    /**
+     *
      * @return void
      */
     public function registerTables()
@@ -53,18 +83,17 @@ class Database
 
     /**
      * Uninstall hook
-     * 
+     *
      * @return void
      */
     public function unInstall()
     {
-        register_deactivation_hook(DIGICON_EVENTS_INIT_FILE, array(__CLASS__, 'removeTables'));
+        register_deactivation_hook(DIGICON_EVENTS_INIT_FILE, array($this, 'removeTables'));
     }
-
 
     /**
      * Unintstall function
-     * 
+     *
      * @return void
      */
     public function removeTables()

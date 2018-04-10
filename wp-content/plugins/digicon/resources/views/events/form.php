@@ -35,7 +35,7 @@
 <form method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="multipart/form-data">
     <div class="lite-form-style" style="margin-top: 50px">
         <div class="header">
-            <h3>Create Event</h3>
+            <h3><?php echo $title; ?> Event</h3>
         </div>
         <?php
             if(isset($event)){

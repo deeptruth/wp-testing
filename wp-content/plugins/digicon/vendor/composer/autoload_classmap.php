@@ -14,6 +14,7 @@ return array(
     'Digicon\\Listables\\BaseWPListTable' => $baseDir . '/app/Http/ListTables/BaseWPListTable.php',
     'Digicon\\Listables\\EventListTable' => $baseDir . '/app/Http/ListTables/EventListTable.php',
     'Digicon\\Models\\Event' => $baseDir . '/app/Http/Models/Event.php',
+    'Digicon\\Models\\User' => $baseDir . '/app/Http/Models/User.php',
     'Digicon\\Setup\\App' => $baseDir . '/app/Setup/App.php',
     'Digicon\\Setup\\Database' => $baseDir . '/app/Setup/Database.php',
     'Digicon\\Setup\\Route' => $baseDir . '/app/Setup/Route.php',
